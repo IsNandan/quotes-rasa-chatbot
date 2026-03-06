@@ -1,219 +1,220 @@
-# Quotes Recommendation Chatbot (Rasa NLU)
+## Abstract
 
-A Rasa-based conversational chatbot that recommends meaningful quotes based on user intent, category, and emotional cues.
+  The Quotes Recommendation Chatbot is a conversational AI system
+  built using Rasa NLU to provide users with personalized and
+  meaningful quotes based on their intent, emotional state, and
+  preferred category. The chatbot addresses the need for instant
+  motivation, emotional reassurance, and positivity in daily
+  life. It supports quote categories such as Inspiration,
+  Motivation, Success, Love, and Humor, and responds through
+  natural language interactions. The solution includes a custom
+  action for quote recommendation, dialogue management using
+  stories and rules, and deployment through a browser-based
+  interface via Rasa REST API. The project demonstrates a
+  complete lifecycle from problem definition and data preparation
+  to training, testing, deployment, and validation.
 
-## What This Project Does
-- Understands user messages using Rasa NLU.
-- Recommends quotes in categories: `inspiration`, `motivation`, `success`, `love`, `humor`.
-- Uses emotion-to-category mapping (example: `sad -> inspiration`, `stressed -> motivation`).
-- Asks follow-up feedback (`Did this help?`) for engagement.
-- Supports browser chat via Rasa REST API.
+  ## 1. Introduction
 
-## Tech Stack
-- Rasa Open Source `3.6.20`
-- Rasa SDK `3.6.2`
-- Python `3.10` (required for this Rasa version)
+  In today’s fast-paced environment, people frequently seek quick
+  emotional support and encouragement. Manual searching for
+  appropriate quotes is often inefficient and time-consuming.
+  This project introduces an intelligent chatbot that understands
+  user messages and delivers relevant quotes instantly. The
+  chatbot focuses on user engagement by adding follow-up
+  interaction such as satisfaction checks after quote delivery.
 
-## Project Structure
-```text
-.
-├── Makefile
-├── actions/
-│   ├── __init__.py
-│   └── actions.py
-├── data/
-│   ├── nlu.yml
-│   ├── rules.yml
-│   └── stories.yml
-├── frontend/
-│   ├── app.js
-│   ├── index.html
-│   └── style.css
-├── tests/
-│   └── test_stories.yml
-├── config.yml
-├── credentials.yml
-├── domain.yml
-├── endpoints.yml
-├── requirements.txt
-├── scripts/
-│   └── smoke_test.sh
-└── README.md
-```
+  ## 2. Problem Statement
 
-## Prerequisites
-- OS: Ubuntu/WSL/Linux
-- Python: `3.10.x`
-- `pip` and `venv`
+  Users need fast, context-aware motivational content, but
+  existing manual methods are inconsistent and slow. A chatbot
+  that understands user intent and emotions can provide
+  immediate, personalized quote recommendations and improve user
+  experience.
 
-Important:
-- Rasa `3.6.x` does **not** support Python `3.11+` or `3.12`.
-- If your default Python is `3.12`, install and use Python `3.10` specifically.
+  ## 3. Objectives
 
-## 1. Install Python 3.10 (If Not Installed)
-```bash
-sudo apt update
-sudo apt install -y software-properties-common
-sudo add-apt-repository -y ppa:deadsnakes/ppa
-sudo apt update
-sudo apt install -y python3.10 python3.10-venv python3.10-distutils
-```
+  - Build a chatbot that understands natural language input.
+  - Detect user intents and entities (category/emotion).
+  - Recommend suitable quotes based on mood and preference.
+  - Support interactive conversation flow with follow-up
+    feedback.
+  - Deploy chatbot through a web interface using REST API.
+  - Ensure model reusability and ease of retraining.
 
-Check:
-```bash
-python3.10 --version
-```
+  ## 4. Prerequisites
 
-## 2. Create and Activate Virtual Environment
-From project root:
-```bash
-cd /home/nandan/quotes-rasa-chatbot
-python3.10 -m venv .venv
-source .venv/bin/activate
-```
+  - Python 3.10 (required for Rasa 3.6.20)
+  - Virtual environment (venv) or Anaconda (optional alternative)
+  - Libraries:
+      - rasa==3.6.20
+      - rasa-sdk==3.6.2
+      - setuptools>=68,<76
+      - sqlalchemy<2.0
+  - Development tools:
+      - VS Code
+      - Linux/WSL terminal
+      - Browser for frontend testing
 
-Upgrade packaging tools:
-```bash
-python -m pip install --upgrade pip setuptools wheel
-```
+  ## 5. Methodology / Workflow
 
-## 3. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
+  1. Define business problem and scope
+  2. Gather business requirements
+  3. Prepare NLU training data and conversation flows
+  4. Configure Rasa NLU pipeline and policies
+  5. Implement custom action for quote selection
+  6. Train model and validate consistency
+  7. Test chatbot in CLI and test stories
+  8. Deploy using REST API and web frontend
+  9. Validate deployed behavior and document results
 
-`requirements.txt` includes compatibility pins for this setup:
-- `setuptools>=68,<76`
-- `sqlalchemy<2.0`
+  ## 6. System Design and Implementation
 
-## Quick Start With Make
-If `make` is available, this is the fastest path:
-```bash
-cd /home/nandan/quotes-rasa-chatbot
-make setup
-make train
-```
+  ### 6.1 Story 1: Business Problem
 
-## 4. Train the Model
-```bash
-rasa train
-```
+  The chatbot solves delayed access to emotional support content
+  by providing instant quote recommendations based on user mood
+  and request type.
 
-Expected output:
-- A model file in `models/` (example: `models/<timestamp>.tar.gz`)
+  ### 6.2 Story 2: Business Requirements
 
-## 5. Run the Chatbot (3 Terminals)
-Use project root in all terminals.
+  - Understand user requests for quotes
+  - Support categories: Inspiration, Motivation, Success, Love,
+    Humor
+  - Map emotional terms to suitable quote categories
+  - Provide relevant response with conversational follow-up
+  - Allow web-based usage through browser
 
-Terminal 1 (Action Server):
-```bash
-make run-actions
-```
+  ### 6.3 Story 3: Literature Survey
 
-Terminal 2 (Rasa Server + REST API):
-```bash
-make run-server
-```
+  - Rule-based bots are deterministic but limited in flexibility.
+  - Intent-based NLU systems improve conversational relevance.
+  - Rasa provides open-source customization for domain-driven
+    assistants.
+  - Emotion-aware conversation improves engagement and user
+    satisfaction.
 
-Terminal 3 (Frontend Static Server):
-```bash
-make run-frontend
-```
+  ### 6.4 Story 4: Social/Business Impact
 
-Open in browser:
-- `http://localhost:8000`
+  - Promotes positivity and emotional reassurance
+  - Improves accessibility to motivational content
+  - Useful for education, productivity, wellness, and self-help
+    contexts
+  - Can be extended into enterprise or wellness assistant
+    solutions
 
-## 6. Test Messages
-Try these in the chat UI:
-- `I feel sad, give me a quote`
-- `give me a motivational quote`
-- `I want something funny`
-- `what categories do you support`
-- `I am stressed`
+  ### 6.5 Story 5: Install Rasa and Dependencies
 
-## REST API Test (Without Frontend)
-```bash
-curl -X POST http://localhost:5005/webhooks/rest/webhook \
-  -H "Content-Type: application/json" \
-  -d '{"sender":"cli-user","message":"I need motivation"}'
-```
+  python3.10 -m venv .venv
+  source .venv/bin/activate
+  pip install -r requirements.txt
 
-Or run the built-in smoke test:
-```bash
-make smoke
-```
+  ### 6.6 Story 6: Setting Up the Rasa Project
 
-## Key Config Files
-- `config.yml`: NLU pipeline and policies. Includes required `assistant_id`.
-- `domain.yml`: intents, entities, slots, responses, actions.
-- `data/nlu.yml`: training examples for intents/entities/synonyms.
-- `data/stories.yml` and `data/rules.yml`: conversation behavior.
-- `actions/actions.py`: custom quote selection logic.
-- `credentials.yml`: enables REST channel.
-- `endpoints.yml`: action server URL.
+  Configured key files:
 
-## Common Errors and Fixes
+  - config.yml (pipeline/policies/assistant_id)
+  - domain.yml (intents/entities/slots/responses/actions)
+  - data/nlu.yml, data/stories.yml, data/rules.yml
+  - actions/actions.py for personalized quote logic
+  - credentials.yml and endpoints.yml for REST + custom actions
 
-### 1) `This environment is externally managed`
-Cause:
-- Trying to install packages into system Python.
+  ### 6.7 Story 7: Data Collection and Training Format
 
-Fix:
-- Always use virtualenv (`.venv`) and install with `pip` inside it.
+  - Intent examples and entity annotations in nlu.yml
+  - Synonyms and lookup values for robust category detection
+  - Conversation logic via stories and rules in YAML format
 
-### 2) `No matching distribution found for rasa==3.6.20`
-Cause:
-- Using unsupported Python version (3.11/3.12).
+  ### 6.8 Story 8: Bot Responses and Interaction Design
 
-Fix:
-- Use Python `3.10` and recreate `.venv`.
+  - Response templates added in domain.yml
+  - Action returns quotes based on category/emotion
+  - Follow-up: “Did this help?” improves interaction quality
 
-### 3) `ModuleNotFoundError: No module named 'pkg_resources'`
-Cause:
-- Missing `setuptools` in virtualenv.
+  ### 6.9 Story 9: Model Training
 
-Fix:
-```bash
-source .venv/bin/activate
-pip install --upgrade setuptools
-pip install -r requirements.txt
-```
+  rasa train
 
-### 4) SQLAlchemy `MovedIn20Warning`
-Cause:
-- Rasa internals emit warning with SQLAlchemy 2.x compatibility concerns.
+  Produces reusable model artifacts in models/.
 
-Fix:
-- Already handled by pinning `sqlalchemy<2.0` in `requirements.txt`.
+  ### 6.10 Story 10: Model Storage and Reusability
 
-### 5) Frontend says it cannot reach Rasa server
-Checks:
-- Is `rasa run --enable-api --cors "*" -p 5005` running?
-- Is action server running on port `5055`?
-- Is frontend loaded from `http://localhost:8000`?
+  - Trained model files stored in models/
+  - New training required only when data/config changes
+  - Model files can be reused for deployment environments
 
-## Development Workflow
-After changing training data/config/domain:
-```bash
-make train
-```
-Restart servers after retraining.
+  ## 7. Testing and Validation
 
-## Optional CLI Chat Test
-```bash
-make shell
-```
+  ### 7.1 Story 1: Testing Using rasa shell
 
-## Additional Make Targets
-```bash
-make help        # list all targets
-make validate    # validate domain/data consistency
-make test        # run rasa tests
-make clean       # clean local cache artifacts
-```
+  rasa shell
 
-## Telemetry (Optional)
-Disable anonymous telemetry if desired:
-```bash
-rasa telemetry disable
-```
+  Validated response quality for mood/category queries.
+
+  ### 7.2 Story 2: Testing Using Test Stories
+
+  rasa test
+
+  Verified conversation paths from tests/test_stories.yml.
+
+  ### 7.3 Story 3: Deployment Using Web Interface
+
+  Run:
+
+  1. rasa run actions
+  2. rasa run --enable-api --cors "*"
+  3. python3 -m http.server 8000 --directory frontend
+     Then access http://localhost:8000.
+
+  ### 7.4 Story 4: Validation of Deployed Chatbot
+
+  - REST smoke test executed successfully (make smoke)
+  - Validated end-to-end quote recommendation via browser UI
+  - Confirmed custom action execution and follow-up behavior
+
+  ## 8. Results
+
+  The chatbot successfully:
+
+  - Detected intents and emotional cues
+  - Recommended category-appropriate quotes
+  - Maintained conversational flow with follow-up questions
+  - Worked through both CLI and web interface
+  - Passed deployment smoke test through REST webhook
+
+  ## 9. Screenshots (To Include in Final Submission)
+
+  1. Project folder structure
+  2. Successful dependency installation
+  3. rasa train output
+  4. Running action server terminal
+  5. Running Rasa API server terminal
+  6. Browser chat interface with sample conversation
+  7. Smoke test success output
+
+  ## 10. Challenges and Fixes
+
+  - Python compatibility issues with Rasa fixed by moving to
+    Python 3.10
+  - PEP 668 “externally managed” issue fixed via virtual
+    environment usage
+  - pkg_resources error fixed by adding setuptools
+  - SQLAlchemy warning handled via sqlalchemy<2.0 pinning
+
+  ## 11. Future Enhancements
+
+  - Add large external quote dataset/database integration
+  - Multi-language support
+  - User-specific recommendation history
+  - Sentiment scoring for improved personalization
+  - Cloud deployment with monitoring and analytics
+
+  ## 12. Conclusion
+
+  The Quotes Recommendation Chatbot demonstrates a complete and
+  practical conversational AI solution built with Rasa NLU. It
+  addresses a real user need for quick emotional support and
+  motivational content through context-aware responses. The
+  project is modular, deployable, and extensible, making it
+  suitable as both an academic project and a base for real-world
+  applications.
