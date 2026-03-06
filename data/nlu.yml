@@ -1,0 +1,133 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - hi
+      - hello
+      - hey
+      - good morning
+      - good evening
+      - yo
+      - hello bot
+
+  - intent: goodbye
+    examples: |
+      - bye
+      - goodbye
+      - see you
+      - catch you later
+      - talk to you later
+
+  - intent: request_quote
+    examples: |
+      - give me a quote
+      - I need a quote
+      - share a quote with me
+      - can you suggest something meaningful
+      - I feel [sad](emotion), give me a quote
+      - I am [stressed](emotion), need something uplifting
+      - I need [motivation](category)
+      - give me a [motivational](category) quote
+      - show me an [inspirational](category) quote
+      - I want a [success](category) quote
+      - tell me a [love](category) quote
+      - send me something [funny](category)
+      - I need [inspiration](category)
+      - quote for [anxiety](emotion)
+      - quote for [confidence](emotion)
+      - quote for [heartbreak](emotion)
+      - I am feeling [low](emotion)
+      - motivate me please
+      - I want something positive
+
+  - intent: specify_category
+    examples: |
+      - [inspiration](category)
+      - [inspirational](category)
+      - [motivation](category)
+      - [motivational](category)
+      - [success](category)
+      - [love](category)
+      - [humor](category)
+      - [funny](category)
+      - [inspire](category) me
+      - [motivate](category) me
+
+  - intent: specify_emotion
+    examples: |
+      - I feel [sad](emotion)
+      - I am [happy](emotion)
+      - I am [anxious](emotion)
+      - feeling [down](emotion)
+      - I feel [lonely](emotion)
+      - I am [excited](emotion)
+      - I feel [heartbroken](emotion)
+      - I am [tired](emotion)
+
+  - intent: ask_categories
+    examples: |
+      - what categories do you support
+      - what kinds of quotes do you have
+      - list quote categories
+      - show all categories
+      - what can you recommend
+
+  - intent: affirm
+    examples: |
+      - yes
+      - yeah
+      - y
+      - definitely
+      - that helped
+      - good one
+      - nice
+
+  - intent: deny
+    examples: |
+      - no
+      - nope
+      - not really
+      - that did not help
+      - bad quote
+      - try another
+
+  - intent: thank_you
+    examples: |
+      - thanks
+      - thank you
+      - appreciate it
+      - thanks a lot
+
+  - intent: bot_challenge
+    examples: |
+      - are you a bot
+      - are you human
+      - who are you
+
+  - synonym: inspiration
+    examples: |
+      - inspirational
+      - inspire
+
+  - synonym: motivation
+    examples: |
+      - motivational
+      - motivate
+
+  - synonym: humor
+    examples: |
+      - funny
+      - joke
+
+  - lookup: category
+    examples: |
+      - inspiration
+      - motivation
+      - success
+      - love
+      - humor
+
+  - regex: emotion
+    examples: |
+      - sad|happy|stressed|anxious|lonely|heartbroken|low|tired|excited|confident

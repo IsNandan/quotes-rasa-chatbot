@@ -1,0 +1,31 @@
+version: "3.1"
+
+stories:
+  - story: user asks quote directly with category
+    steps:
+      - intent: request_quote
+      - action: action_get_personalized_quote
+
+  - story: user greets then asks quote
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: request_quote
+      - action: action_get_personalized_quote
+
+  - story: ask category then user specifies category
+    steps:
+      - intent: request_quote
+      - action: action_get_personalized_quote
+      - intent: specify_category
+      - action: action_get_personalized_quote
+
+  - story: feedback helpful
+    steps:
+      - intent: affirm
+      - action: utter_glad_helped
+
+  - story: feedback not helpful
+    steps:
+      - intent: deny
+      - action: utter_sorry_not_helpful

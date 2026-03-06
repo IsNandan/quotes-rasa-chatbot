@@ -1,0 +1,20 @@
+version: "3.1"
+
+stories:
+  - story: test basic quote request
+    steps:
+      - user: |
+          hello
+        intent: greet
+      - action: utter_greet
+      - user: |
+          give me a motivational quote
+        intent: request_quote
+      - action: action_get_personalized_quote
+
+  - story: test categories list
+    steps:
+      - user: |
+          what categories do you support
+        intent: ask_categories
+      - action: utter_categories
