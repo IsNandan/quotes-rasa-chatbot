@@ -28,3 +28,7 @@ results/
 Thumbs.db
 .vscode/
 .idea/
+
+# Local demo videos
+demo_video/
+*.mp4

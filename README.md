@@ -1,107 +1,82 @@
-# Quotes Recommendation Chatbot (Rasa)
+# Quotes Recommendation Chatbot
 
-A conversational AI chatbot built with Rasa that recommends quotes based on user intent, mood, and preferred category.
+Simple Rasa chatbot that gives quotes by category or emotion.
 
-## Features
+## 1. Prerequisites
 
-- Intent and entity detection with Rasa NLU
-- Quote recommendation via custom action server
-- Supported quote categories: Inspiration, Motivation, Success, Love, Humor
-- Web chat frontend using Rasa REST API
-- CLI and automated smoke-test support
+- Python `3.10` (required)
+- `make`
+- Terminal (Linux/WSL/macOS)
 
-## Tech Stack
+Check Python:
 
-- Python 3.10
-- Rasa `3.6.20`
-- Rasa SDK `3.6.2`
-
-## Project Structure
-
-```text
-.
-├── actions/              # Custom Rasa actions
-├── data/                 # NLU data, stories, rules
-├── frontend/             # Browser chat UI
-├── tests/                # Test stories
-├── scripts/              # Utility scripts (smoke test)
-├── config.yml            # Rasa pipeline and policies
-├── domain.yml            # Intents, entities, responses, actions
-├── endpoints.yml         # Action server endpoint
-├── credentials.yml       # REST channel config
-├── requirements.txt      # Python dependencies
-└── Makefile              # Common commands
+```bash
+python3.10 --version
 ```
 
-## Prerequisites
+## 2. Setup (Run Once)
 
-- Python `3.10`
-- `make`
-- Linux/WSL/macOS terminal
-
-## Quickstart
-
-From the project root:
+From project root:
 
 ```bash
 make setup
 make train
 ```
 
-Run these in separate terminals:
+## 3. Run the Project
+
+Open **3 terminals** in project root.
+
+Terminal 1:
 
 ```bash
-# Terminal 1
 make run-actions
 ```
 
+Terminal 2:
+
 ```bash
-# Terminal 2
 make run-server
 ```
 
+Terminal 3:
+
 ```bash
-# Terminal 3
 make run-frontend
 ```
 
-Open the app:
+Open in browser:
 
 ```text
 http://localhost:8000
 ```
 
-## Useful Commands
+## 4. Quick Verification
+
+In a new terminal:
 
 ```bash
-make help       # List all available tasks
-make validate   # Validate training data/domain
-make test       # Run Rasa tests
-make shell      # Chat in terminal
-make smoke      # REST webhook smoke test
-make clean      # Remove local cache artifacts
+make smoke
 ```
 
-## API Endpoints
+Expected: non-empty response and `Smoke test passed.`
 
-- Rasa server: `http://localhost:5005`
-- REST webhook: `http://localhost:5005/webhooks/rest/webhook`
-- Action server health: `http://localhost:5055/health`
+## 5. Useful Commands
 
-## Report and Demo
+```bash
+make shell      # chat in terminal
+make test       # run Rasa tests
+make validate   # validate training data/domain
+make clean      # clean local cache files
+```
 
-- Project Report: `Project_Report.pdf` (add at repo root or `docs/Project_Report.pdf`)
-- Demo Video Link: `PASTE_DEMO_VIDEO_LINK_HERE`
+## 6. Common Issues
 
-## Submission Checklist
+- `python3.10 not found`: install Python 3.10, then run `make setup` again.
+- Empty smoke response: ensure `make run-server` is running.
+- Action errors: ensure `make run-actions` is running.
 
-- All project files committed (code, configs, tests, scripts, frontend)
-- Project report included in the repository
-- Demo video link added in this README
-- Repository pushed to GitHub and shared on submission platform
+## 7. Report and Demo
 
-## Troubleshooting
-
-- If `make setup` fails, verify Python 3.10 is installed and available as `python3.10`.
-- If smoke test fails, ensure `make run-server` is active before `make smoke`.
-- If custom actions do not run, start `make run-actions` and confirm `http://localhost:5055/health` is reachable.
+- Project report file: `project_report.pdf`
+- Demo video link: `https://drive.google.com/file/d/17ABaiosKWO2MkKdLFq9KG2aAsmfNc9u-/view?usp=sharing`
