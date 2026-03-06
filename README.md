@@ -179,18 +179,17 @@
   - Detected intents and emotional cues
   - Recommended category-appropriate quotes
   - Maintained conversational flow with follow-up questions
-  - Worked through both CLI and web interface
   - Passed deployment smoke test through REST webhook
 
   ## 9. Screenshots (To Include in Final Submission)
 
-  1. Project folder structure
-  2. Successful dependency installation
-  3. rasa train output
+  1. Project folder structure ![Folder Structure](screenshots/successful_dependencies.png)
+  2. Successful dependency installation ![Dependencies](screenshots/successful_dependencies.png)
+  3. rasa train output ![Folder Structure](screenshots/rasa_train_output.png)
   4. Running action server terminal
-  5. Running Rasa API server terminal
-  6. Browser chat interface with sample conversation
-  7. Smoke test success output
+  5. Running Rasa API server terminal 
+  6. Browser chat interface with sample conversation ![Chatbot](screenshots/chatbot.png)
+  7. Smoke test success output ![smoke test](screenshots/smoke_test.png)
 
   ## 10. Challenges and Fixes
 
