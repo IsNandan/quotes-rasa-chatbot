@@ -1,0 +1,56 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - request_quote
+  - specify_category
+  - specify_emotion
+  - affirm
+  - deny
+  - ask_categories
+  - thank_you
+  - bot_challenge
+
+entities:
+  - category
+  - emotion
+
+slots:
+  category:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: category
+  emotion:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: emotion
+
+responses:
+  utter_greet:
+    - text: "Hi! I can recommend quotes for inspiration, motivation, success, love, or humor. How are you feeling today?"
+  utter_goodbye:
+    - text: "Take care. Come back anytime you need a quote boost."
+  utter_ask_category:
+    - text: "Sure. Which category do you want: inspiration, motivation, success, love, or humor?"
+  utter_categories:
+    - text: "I currently support: Inspiration, Motivation, Success, Love, and Humor."
+  utter_glad_helped:
+    - text: "Great to hear that. If you want another one, just ask for a category or mood."
+  utter_sorry_not_helpful:
+    - text: "Thanks for telling me. I can try a different category or tone. What should I pick next?"
+  utter_you_are_welcome:
+    - text: "You're welcome."
+  utter_iamabot:
+    - text: "I am a Rasa-powered Quotes Recommendation Chatbot."
+  utter_default:
+    - text: "I didn't fully get that. Ask me for a quote by category or emotion, like 'give me a motivational quote'."
+
+actions:
+  - action_get_personalized_quote
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
